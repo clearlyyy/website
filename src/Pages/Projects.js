@@ -8,7 +8,7 @@ function Projects() {
         <div className="proj-container">
           <div className="title-img">
             <div>
-              <h2 className="proj-title">S&Miner</h2>
+              <a href="https://sbox.game/clearlyy/s_miner" className="proj-title">S&Miner</a>
               <h4 className="desc">
                 S&Miner is a voxel based incremental mining game built in the
                 S&Box Engine, It features a custom built voxel engine, and

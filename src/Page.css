@@ -354,6 +354,9 @@
     margin-bottom: 0px;
     color: white;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+    font-weight: bold;
+
 }
 
 .proj-img {
@@ -449,7 +452,7 @@
         gap: 20px;
         padding: 0px;
         max-width: 100%;
-        max-height: 70vh;
+        max-height: 80vh;
     }
 }
 
@@ -497,7 +500,7 @@
         gap: 16px;
         padding: 8px;
         max-width: 95%;
-        max-height: calc(100vh - 140px);
+        max-height: 70vh
     }
 
     .proj-container {
@@ -618,7 +621,7 @@
 
     .proj-page {
         grid-template-columns: 1fr;
-        max-height: calc(100vh - 120px);
+        max-height: 75vh;
         padding: 6px;
     }
 }

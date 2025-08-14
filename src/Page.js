@@ -26,8 +26,7 @@ function Page() {
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  function goToPage(page) {
-    if (page === currentPage) return;
+  function goToPage(page) { if (page === currentPage) return;
 
     setBackgroundPage(page);
 
