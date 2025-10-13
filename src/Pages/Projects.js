@@ -3,7 +3,7 @@ import "../Page.css";
 function Projects() {
   return (
     <>
-      <h1 className="proj-page-title">Here are some of my Projects</h1>
+      <h1 className="proj-page-title">Projects</h1>
       <div className="proj-page">
         <div className="proj-container">
           <div className="title-img">
@@ -17,7 +17,7 @@ function Projects() {
                 back-end for storing and retrieving players stats on the cloud.
               </h4>
               <h2 className="year2">
-                2025 - 8k+ Players - #1 Trending on S&Box
+                2025 - 11k+ Players - #1 Trending on S&Box
               </h2>
             </div>
             <img
@@ -29,6 +29,7 @@ function Projects() {
               }
             />
           </div>
+          <div className="tech-github">
           <div className="tech">
             <h4 className="tech-entry">C#</h4>
             <h4 className="tech-entry">Razor</h4>
@@ -36,6 +37,42 @@ function Projects() {
             <h4 className="tech-entry">S&Box</h4>
             <h4 className="tech-entry">Blender</h4>
             <h4 className="tech-entry">Substance 3D</h4>
+          </div> 
+          <div className="github-button" onClick={() => window.open("https://sbox.game/clearlyy/s_miner")}>
+            <img src="imgs/link.svg" className="github-logo"/>
+          </div>
+          </div>
+        </div>
+
+        <div className="proj-container">
+          <div className="title-img">
+            <div>
+              <h2 className="proj-title">LunarLander.io</h2>
+              <h4 className="desc">
+                <a href="https://lunarlander.io" class="link">Lunarlander.io</a> is a lunar flight simulator, letting the user pilot the Apollo 11 Lunar Module on a 1/4th scale
+                version of our moon. It uses Newtonian physics for real orbital mechanics, and features timed obstacle courses, letting players compete 
+                for high scores.
+              </h4>
+              <h2 className="year">2025</h2>
+            </div>
+            <img
+              src="imgs/lunarlander.gif"
+              alt="S&Miner"
+              className="proj-img"
+              onClick={() => window.open("https://lunarlander.io", "_blank")}
+            />
+          </div>
+          <div className="tech-github">
+          <div className="tech">
+            <h4 className="tech-entry">Javascript</h4>
+            <h4 className="tech-entry">ThreeJS</h4>
+            <h4 className="tech-entry">Cesium</h4>
+            <h4 className="tech-entry">HTML</h4>
+            <h4 className="tech-entry">CSS</h4>
+          </div>
+          <div className="github-button" onClick={() => window.open("https://github.com/clearlyyy/lunarlander")}>
+            <img src="imgs/github.svg" className="github-logo"/>
+          </div>
           </div>
         </div>
 
@@ -44,7 +81,7 @@ function Projects() {
             <div>
               <h2 className="proj-title">Sol-System.live</h2>
               <h4 className="desc">
-                Sol-System.live lets you explore the solar system in real-time,
+                <a href="https://sol-system.live" class="link">Sol-System.live</a> lets you explore the solar system in real-time,
                 featuring major moons and detailed data on each celestial body.
                 Built in React with react-three-fiber, it uses two-body orbital
                 physics and NASA JPL data with Kepler’s equations to simulate
@@ -59,13 +96,17 @@ function Projects() {
               onClick={() => window.open("https://sol-system.live", "_blank")}
             />
           </div>
+          <div className="tech-github">
           <div className="tech">
             <h4 className="tech-entry">Javascript</h4>
             <h4 className="tech-entry">React</h4>
             <h4 className="tech-entry">react-three-fiber</h4>
             <h4 className="tech-entry">Python</h4>
-            <h4 className="tech-entry">WebGL</h4>
             <h4 className="tech-entry">GLSL</h4>
+          </div>
+          <div className="github-button" onClick={() => window.open("https://github.com/clearlyyy/sol-system")}>
+            <img src="imgs/github.svg" className="github-logo"/>
+          </div>
           </div>
         </div>
 
@@ -94,6 +135,7 @@ function Projects() {
               }
             />
           </div>
+          <div className="tech-github">
           <div className="tech">
             <h4 className="tech-entry">C++</h4>
             <h4 className="tech-entry">OpenGL</h4>
@@ -101,6 +143,10 @@ function Projects() {
             <h4 className="tech-entry">ImGUI</h4>
             <h4 className="tech-entry">GLFW</h4>
             <h4 className="tech-entry">GLM</h4>
+          </div>
+          <div className="github-button" onClick={() => window.open("https://github.com/clearlyyy/clear-engine")}>
+            <img src="imgs/github.svg" className="github-logo"/>
+          </div>
           </div>
         </div>
 
@@ -193,9 +239,14 @@ function Projects() {
               }
             />
           </div>
+          <div className="tech-github">
           <div className="tech">
             <h4 className="tech-entry">C++</h4>
             <h4 className="tech-entry">SFML</h4>
+          </div>
+          <div className="github-button" onClick={() => window.open("https://github.com/clearlyyy/sfml-console")}>
+            <img src="imgs/github.svg" className="github-logo"/>
+          </div>
           </div>
         </div>
 
@@ -221,9 +272,14 @@ function Projects() {
               }
             />
           </div>
+          <div className="tech-github">
           <div className="tech">
             <h4 className="tech-entry">C++</h4>
             <h4 className="tech-entry">SFML</h4>
+          </div>
+          <div className="github-button" onClick={() => window.open("https://github.com/clearlyyy/PowderGame")}>
+            <img src="imgs/github.svg" className="github-logo"/>
+          </div>
           </div>
         </div>
 
@@ -240,17 +296,22 @@ function Projects() {
               <h2 className="year">2021</h2>
             </div>
             <img
-              src="imgs/sfml-gui.png"
+              src="imgs/sfml-gui.gif"
               alt="S&Miner"
-              className="proj-img"
+              className="proj-img-left"
               onClick={() =>
                 window.open("https://github.com/clearlyyy/sfml-gui", "_blank")
               }
             />
           </div>
+          <div className="tech-github">
           <div className="tech">
             <h4 className="tech-entry">C++</h4>
             <h4 className="tech-entry">SFML</h4>
+          </div>
+          <div className="github-button" onClick={() => window.open("https://github.com/clearlyyy/sfml-gui")}>
+            <img src="imgs/github.svg" className="github-logo"/>
+          </div>
           </div>
         </div>
 
@@ -279,9 +340,14 @@ function Projects() {
               }
             />
           </div>
+          <div className="tech-github">
           <div className="tech">
             <h4 className="tech-entry">Python</h4>
             <h4 className="tech-entry">Selenium</h4>
+          </div>
+          <div className="github-button" onClick={() => window.open("https://github.com/clearlyyy/ViewbotAnalysisTool")}>
+            <img src="imgs/github.svg" className="github-logo"/>
+          </div>
           </div>
         </div>
       </div>
