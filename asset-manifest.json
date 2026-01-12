@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/website/static/css/main.3a50378b.css",
+    "main.js": "/website/static/js/main.f62f4e0e.js",
+    "static/js/453.6264690d.chunk.js": "/website/static/js/453.6264690d.chunk.js",
+    "static/media/TerminessNerdFont-Bold.ttf": "/website/static/media/TerminessNerdFont-Bold.722b9369aa2e634a59a9.ttf",
+    "index.html": "/website/index.html",
+    "main.3a50378b.css.map": "/website/static/css/main.3a50378b.css.map",
+    "main.f62f4e0e.js.map": "/website/static/js/main.f62f4e0e.js.map",
+    "453.6264690d.chunk.js.map": "/website/static/js/453.6264690d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3a50378b.css",
+    "static/js/main.f62f4e0e.js"
+  ]
+}
