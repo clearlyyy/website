@@ -3,11 +3,9 @@ import { useFrame, useThree, extend } from "@react-three/fiber";
 import { shaderMaterial } from "@react-three/drei";
 import * as THREE from "three";
 
-// ASCII characters for the matrix effect
 const ASCII_CHARS =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?";
 
-// Shader material for rendering ASCII characters with glow
 const MatrixMaterial = shaderMaterial(
   {
     time: 0,
@@ -20,6 +18,8 @@ const MatrixMaterial = shaderMaterial(
     useVideo: 0.0,
     clickTime: 0.0,
     clickPosition: new THREE.Vector2(0, 0),
+    gridWidth: 60.0,
+    gridHeight: 30.0,
   },
   // Vertex shader
   `
@@ -41,23 +41,21 @@ const MatrixMaterial = shaderMaterial(
     uniform float useVideo;
     uniform float clickTime;
     uniform vec2 clickPosition;
+    uniform float gridWidth;
+    uniform float gridHeight;
 
     varying vec2 vUv;
 
     void main() {
       vec2 uv = vUv;
 
-      // Create grid pattern that adapts to aspect ratio
-      float gridWidth = 80.0;
-      float gridHeight = 40.0;
+      float gW = gridWidth;
+      float gH = gridHeight; 
 
-      // Adjust grid density to maintain square character cells
       if (aspectRatio > 1.0) {
-        gridWidth = 80.0 * aspectRatio;
-        gridHeight = 40.0;
+        gW = gridWidth * aspectRatio;
       } else {
-        gridWidth = 80.0;
-        gridHeight = 40.0 / aspectRatio;
+        gH = gridHeight / aspectRatio;
       }
 
       vec2 grid = floor(uv * vec2(gridWidth, gridHeight));
@@ -99,7 +97,7 @@ const MatrixMaterial = shaderMaterial(
         videoGlow = dot(videoColor.rgb, vec3(0.299, 0.587, 0.114));
       }
 
-      // Base character color (dark grey) and glow (bright green)
+      // Base character color and glow 
       float charAlpha = charColor.a;
       vec3 baseColor = vec3(0.005, 0.005, 0.005); // Dark grey base
 
@@ -120,7 +118,7 @@ const MatrixMaterial = shaderMaterial(
         float ringRadius = timeSinceClick * ringSpeed;
         float ringDistance = abs(distanceFromClick - ringRadius);
 
-        // Ring effect with fade out
+        // Ring effect 
         if (ringRadius < maxRadius) {
           float ringIntensity = 1.0 - ringDistance / ringWidth;
           ringIntensity = smoothstep(0.0, 1.0, ringIntensity);
@@ -129,13 +127,11 @@ const MatrixMaterial = shaderMaterial(
         }
       }
 
-      // Combine mouse glow, video glow, and click ring
       float totalGlow = max(max(mouseGlow, videoGlow), clickRing);
       vec3 glowColor = vec3(0.0, 1.0, 0.0) * totalGlow * 1.0; // Bright green glow
       vec3 finalColor = baseColor * charAlpha + glowColor * charAlpha;
 
-      // Add some variation in brightness
-      finalColor *= 0.8 + random * 0.4;
+      finalColor *= 0.6 + random * 0.4;
 
       // Keep background black
       gl_FragColor = vec4(finalColor, charAlpha);
@@ -150,8 +146,7 @@ function MatrixBackground({ videoSrc = null }) {
   const meshRef = useRef();
   const materialRef = useRef();
   const { size, camera } = useThree();
-  const [mousePosition, setMousePosition] = React.useState([-1, -1]); // Start off-screen
-  const [videoTexture, setVideoTexture] = React.useState(null);
+  const [mousePosition, setMousePosition] = React.useState([-1, -1]);  const [videoTexture, setVideoTexture] = React.useState(null);
   const videoRef = React.useRef();
   const [clickTime, setClickTime] = React.useState(0);
   const [clickPosition, setClickPosition] = React.useState([0, 0]);

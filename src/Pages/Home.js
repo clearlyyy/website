@@ -1,4 +1,4 @@
-function Home({goToPage}) {
+function Home() {
   return (
     <>
       <div className="Title">
@@ -9,10 +9,6 @@ function Home({goToPage}) {
         technologies, and solving complex problems. Check out some of my
         projects.
       </h2>
-
-      <div onClick={() => goToPage("Projects")} className="Projects-Button">
-        <h2 className="button-text">Projects</h2>
-      </div>
     </>
   );
 }

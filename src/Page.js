@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
 import "./Page.css";
 import Home from "./Pages/Home";
 import Projects from "./Pages/Projects";
@@ -8,54 +8,18 @@ import Github from "./Pages/Github";
 import Contact from "./Pages/Contact";
 
 function Page() {
-  const [currentPage, setCurrentPage] = useState("Home");
-  const [backgroundPage, setBackgroundPage] = useState("Home");
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [animationDirection, setAnimationDirection] = useState("");
-  const [isMobile, setIsMobile] = useState(false);
+  const location = useLocation();
 
-  // Check screen size
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 1600);
-    };
-
-    checkScreenSize();
-    window.addEventListener("resize", checkScreenSize);
-
-    return () => window.removeEventListener("resize", checkScreenSize);
-  }, []);
-
-  function goToPage(page) { if (page === currentPage) return;
-
-    setBackgroundPage(page);
-
-    setIsAnimating(true);
-    setAnimationDirection("out");
-
-    // Wait for exit animation, then change page and animate in
-    setTimeout(() => {
-      setCurrentPage(page);
-      setAnimationDirection("in");
-      setTimeout(() => {
-        setAnimationDirection("in animate");
-        setTimeout(() => {
-          setIsAnimating(false);
-          setAnimationDirection("");
-        }, 350);
-      }, 50);
-    }, 350);
-  }
-
-  // Calculate the position for the sliding background
   const getBackgroundPosition = () => {
     const buttonPositions = {
-      Home: 0,
-      Projects: 1,
-      About: 2,
-      Github: 3,
-      Contact: 4,
+      "/": 0,
+      "/projects": 1,
+      "/about": 2,
+      "/github": 3,
+      "/contact": 4,
     };
+
+    const currentPos = buttonPositions[location.pathname] || 0;
 
     let buttonWidth = 100;
     let buttonMargin = 2;
@@ -80,35 +44,20 @@ function Page() {
     // Calculate position: title container width + (button position * spacing) + margin offset
     return (
       titleContainerWidth +
-      buttonPositions[backgroundPage] * totalButtonSpacing +
+      currentPos * totalButtonSpacing +
       buttonMargin +
       slidingBgOffset
     );
   };
 
-  const renderPage = () => {
-    // Handle all pages when in mobile mode or for non-Home/Projects pages
-    const pageComponents = {
-      Home: Home,
-      Projects: Projects,
-      About: About,
-      Github: Github,
-      Contact: Contact,
-    };
-
-    const PageComponent = pageComponents[currentPage];
-    return <PageComponent goToPage={goToPage} />;
-  };
-
   return (
-    <div className="page">
+    <div className={`page ${location.pathname === '/projects' ? 'projects-page' : ''}`}>
       <div className="nav-bar">
         <div className="title-container">
           <h1 className="logo">&lt;/&gt;</h1>
           <h1 className="nav-bar-title">CLEARLY</h1>
         </div>
 
-        {/* Sliding background */}
         <div
           className="nav-bar-sliding-bg"
           style={{
@@ -124,59 +73,55 @@ function Page() {
 
         <div
           className="nav-bar-title-notselected"
-          onClick={() => goToPage("Home")}
-          style={{ color: backgroundPage === "Home" ? "black" : "white" }}
+          style={{ color: location.pathname === "/" ? "black" : "white" }}
         >
-          <h1 className="nav-bar-title2">Home</h1>
+          <Link to="/" className="nav-link">
+            <h1 className="nav-bar-title2">Home</h1>
+          </Link>
         </div>
         <div
           className="nav-bar-title-notselected"
-          onClick={() => goToPage("Projects")}
-          style={{ color: backgroundPage === "Projects" ? "black" : "white" }}
+          style={{ color: location.pathname === "/projects" ? "black" : "white" }}
         >
-          <h1 className="nav-bar-title2">Projects</h1>
+          <Link to="/projects" className="nav-link">
+            <h1 className="nav-bar-title2">Projects</h1>
+          </Link>
         </div>
         <div
           className="nav-bar-title-notselected"
-          onClick={() => goToPage("About")}
-          style={{ color: backgroundPage === "About" ? "black" : "white" }}
+          style={{ color: location.pathname === "/about" ? "black" : "white" }}
         >
-          <h1 className="nav-bar-title2">About</h1>
+          <Link to="/about" className="nav-link">
+            <h1 className="nav-bar-title2">About</h1>
+          </Link>
         </div>
         <div
           className="nav-bar-title-notselected"
-          onClick={() => goToPage("Github")}
-          style={{ color: backgroundPage === "Github" ? "black" : "white" }}
+          style={{ color: location.pathname === "/github" ? "black" : "white" }}
         >
-          <h1 className="nav-bar-title2">Github</h1>
+          <Link to="/github" className="nav-link">
+            <h1 className="nav-bar-title2">Github</h1>
+          </Link>
         </div>
         <div
           className="nav-bar-title-notselected"
-          onClick={() => goToPage("Contact")}
-          style={{ color: backgroundPage === "Contact" ? "black" : "white" }}
+          style={{ color: location.pathname === "/contact" ? "black" : "white" }}
         >
-          <h1 className="nav-bar-title2">Contact</h1>
+          <Link to="/contact" className="nav-link">
+            <h1 className="nav-bar-title2">Contact</h1>
+          </Link>
         </div>
       </div>
 
-      {!isMobile && (currentPage === "Home" || currentPage === "Projects") && (
-        <div className="home-projects-container">
-          <div className="home-section">
-            <Home goToPage={goToPage} />
-          </div>
-          <div
-            className={`projects-section ${currentPage === "Projects" ? "show" : "hide"}`}
-          >
-            <Projects />
-          </div>
-        </div>
-      )}
-
-      {(isMobile || (currentPage !== "Home" && currentPage !== "Projects")) && (
-        <div className={`content page-transition ${animationDirection}`}>
-          {renderPage()}
-        </div>
-      )}
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/github" element={<Github />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </div>
     </div>
   );
 }

@@ -1,3 +1,5 @@
+
+
 .App {
   width: 100vw;
   height: 100vh;
@@ -12,4 +14,32 @@ canvas {
   width: 100% !important;
   height: 100% !important;
   pointer-events: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    rgb(20, 20, 20) 30%,   
+    rgba(0, 0, 0, 0) 90%  
+  );
+}
+
+.overlay2 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    to left,
+    rgb(20, 20, 20) 30%,   
+    rgba(27, 27, 27, 0) 90%  
+  );
 }

@@ -8,6 +8,7 @@ import {
   Vignette,
   BrightnessContrast,
 } from "@react-three/postprocessing";
+import { BrowserRouter as Router } from "react-router-dom";
 import MatrixBackground from "./components/MatrixBackground";
 import "./App.css";
 import Page from "./Page";
@@ -56,7 +57,6 @@ function App() {
 
     window.addEventListener("resize", handleResize);
 
-    // Initial size set
     handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
@@ -72,20 +72,23 @@ function App() {
         }}
       >
         <ResponsiveCamera />
-        <MatrixBackground videoSrc="/fish.mp4" />
+        <MatrixBackground videoSrc="/fish.mp4"/>
         <EffectComposer>
           <Bloom
             threshold={0.1}
-            intensity={8}
+            intensity={4}
             luminanceThreshold={0.3}
-            radius={0.6}
+            radius={0.8}
           />
           <ChromaticAberration offset={[0.002, 0.002]} />
           <Vignette darkness={0.3} offset={0.5} />
           <BrightnessContrast brightness={0.1} contrast={0.1} />
         </EffectComposer>
       </Canvas>
-      <Page />
+      <Router>
+        <Page />
+      </Router>
+      <div className="overlay"></div>
       <h2 className="footer">
         <img className="svg-logo" src="/imgs/x_logo.svg" alt="X Logo" />
         <a className="footer-link" href="https://x.com/devclearly">
@@ -94,9 +97,10 @@ function App() {
 
         <img className="svg-logo" src="/imgs/github.svg" alt="X Logo" />
         <a className="footer-link" href="https://github.com/clearlyyy">
-          @clearlyyy
+          clearlyyy
         </a>
       </h2>
+      <div className="overlay2"></div>
     </div>
   );
 }
